@@ -1,0 +1,13 @@
+.root,
+.root-container {
+  position: relative;
+}
+
+.root-container,
+.root-fix {
+  height: 100vh;
+}
+
+.root-fix {
+  overflow: hidden;
+}

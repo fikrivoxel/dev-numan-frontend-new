@@ -1,0 +1,74 @@
+.fon {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-family: 'Numan';
+  font-weight: normal;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1;
+  &-twitter {
+    &:after {
+      content: '\f099';
+    }
+  }
+  &-facebook {
+    &:after {
+      content: '\f09a';
+    }
+  }
+  &-instagram {
+    &:after {
+      content: '\f16d';
+    }
+  }
+  &-googleplus {
+    &:after {
+      content: '\f0d5';
+    }
+  }
+  &-linkedin {
+    &:after {
+      content: '\f0e1';
+    }
+  }
+  &-caret-down {
+    &:after {
+      content: '\e800';
+    }
+  }
+  &-zoom {
+    &:after {
+      content: '\e801';
+    }
+  }
+  &-th-mini {
+    &:after {
+      content: '\e802';
+    }
+  }
+  &-th-full {
+    &:after {
+      content: '\e803';
+    }
+  }
+  &-share {
+    &:after {
+      content: '\E804';
+    }
+  }
+}
+
+.fon-w {
+  text-align: center;
+  width: 1.25em
+}
+
+.fon-rotate {
+  transform: rotateZ(90deg);
+  @include transition(transform .3s);
+  &.active {
+    transform: rotateZ(0);
+  }
+}
