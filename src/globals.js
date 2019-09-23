@@ -19,31 +19,34 @@ export const PAGES = [
     },
     active: false
   },
-  {
-    id: 'catalog',
-    name: 'Catalogs Download',
-    title: {
-      type: 'text',
-      caption: 'Get the product list of NOMAN'
-    },
-    active: false
-  },
-  {
-    id: 'aboutus',
-    name: 'About Us',
-    title: {
-      type: 'text',
-      caption: 'Amazing stories of our product'
-    },
-    active: false
-  },
-  {
-    id: 'contactus',
-    name: 'Contact Us',
-    title: {
-      type: 'text',
-      caption: 'Stay in touch with us!'
-    },
-    active: false
-  }
+  // {
+  //   id: 'catalog',
+  //   name: 'Catalogs Download',
+  //   title: {
+  //     type: 'text',
+  //     caption: 'Get the product list of NOMAN'
+  //   },
+  //   active: false
+  // },
+  // {
+  //   id: 'aboutus',
+  //   name: 'About Us',
+  //   title: {
+  //     type: 'text',
+  //     caption: 'Amazing stories of our product'
+  //   },
+  //   active: false
+  // },
+  // {
+  //   id: 'contactus',
+  //   name: 'Contact Us',
+  //   title: {
+  //     type: 'text',
+  //     caption: 'Stay in touch with us!'
+  //   },
+  //   active: false
+  // }
+]
+export const DUMMY_COLLECTIONS = [
+  {id: 1, name: '', url: '', thumbnail: ''}
 ]

@@ -34,25 +34,25 @@
   color: #6c6c6c;
   padding: .5rem 1rem;
   @include hover {
-    color: #9e009e;
+    color: #9d30a1;
   }
-}
-
-.header-title {
-  display: flex;
-  justify-content: center;
 }
 
 .header-title-img {
-  width: 500px;
   > img {
-    width: 100%;
-  }
-  @include media-breakpoint-down(md) {
     width: 400px;
+    @include media-breakpoint-down(xs) {
+      width: 300px;
+    }
   }
-  @include media-breakpoint-down(xs) {
-    width: 300px;
-  }
+}
+
+.header-title-text,
+.header-title-img {
+  text-align: center;
+}
+
+.header-title-caption {
+  font-size: 80%;
 }
 

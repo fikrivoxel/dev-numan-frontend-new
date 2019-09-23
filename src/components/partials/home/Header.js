@@ -40,8 +40,8 @@ export default class Header extends Component {
     })
     return (
       <VelocityTransitionGroup
-        enter={{animation: {translateY: 0, translateZ: 0, opacity: 1}}}
-        leave={{animation: {translateY: 10, translateZ: 0, opacity: 0}}}
+        enter={{animation: {translateY: 0, opacity: 1}, delay: 500}}
+        leave={{animation: {translateY: 20, opacity: 0}}}
         className='header-title'>
         {pagesMap}
       </VelocityTransitionGroup>

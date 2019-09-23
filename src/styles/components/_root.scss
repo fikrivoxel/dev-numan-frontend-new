@@ -1,13 +1,13 @@
+.body-fix {
+  height: 100vh;
+  overflow: hidden;
+}
+
 .root,
 .root-container {
   position: relative;
 }
 
-.root-container,
-.root-fix {
+.root-content {
   height: 100vh;
-}
-
-.root-fix {
-  overflow: hidden;
 }

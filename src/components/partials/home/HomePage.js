@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, createRef} from 'react'
 import {Carousel, CarouselItem} from 'reactstrap'
 
 export default class HomePage extends Component {
@@ -6,6 +6,7 @@ export default class HomePage extends Component {
     {src: '/images/home-bg-1.jpg', altText: 'Home BG 1'},
     {src: '/images/home-bg-2.png', altText: 'Home BG 2'}
   ]
+  el = createRef()
   state = {
     activeIndex: 0
   }
@@ -18,7 +19,6 @@ export default class HomePage extends Component {
     this.prev = this.prev.bind(this)
     this.gotoIndex = this.gotoIndex.bind(this)
   }
-
 
   onExiting() {
     this.animating = true
@@ -46,7 +46,7 @@ export default class HomePage extends Component {
 
   gotoIndex(idx) {
     if (this.animating) return
-    this.setState({activeIdx: idx})
+    this.setState({activeIndex: idx})
   }
 
   carouselItem() {
@@ -71,11 +71,50 @@ export default class HomePage extends Component {
     )
   }
 
+  btnIndicator() {
+    let {activeIndex} = this.state
+    let items = this.items.map((it, i) => {
+      let active = activeIndex === i ? 'active' : ''
+      return (
+        <button type='button'
+                className={`home-btn-indicator ${active}`}
+                onClick={e => this.gotoIndex(i)}
+                key={i}/>
+      )
+    })
+    return (
+      <div className='home-indicator'>
+        {items}
+      </div>
+    )
+  }
+
+  btnDown() {
+    let {gotoidx} = this.props
+    return (
+      <div className='home-down'>
+        <button type='button' className='home-btn-down' onClick={() => gotoidx()}>
+          <i className='fon fon-caret-down fon-w'/>
+        </button>
+      </div>
+    )
+  }
+
+  btnGroup() {
+    return (
+      <div className='home-btn-group'>
+        {this.btnIndicator()}
+        {this.btnDown()}
+      </div>
+    )
+  }
+
   render() {
     return (
-      <div className='root-container' id='home'>
+      <div className='root-container' id='home' ref={el => this.el = el}>
         <div className='home'>
           {this.carouesel()}
+          {this.btnGroup()}
         </div>
       </div>
     )

@@ -4,6 +4,7 @@ import {createHashHistory} from 'history'
 import {routerMiddleware, routerActions} from 'connected-react-router'
 import {createLogger} from 'redux-logger'
 import createRootReducer from 'store/reducers'
+import * as collectionsActions from 'store/actions/collections'
 import {NODE_ENV} from 'globals'
 
 const history = createHashHistory()
@@ -19,6 +20,7 @@ const configureStore = function (initialState) {
   let router = routerMiddleware(history)
   middleware.push(router)
   let actionsCreators = {
+    ...collectionsActions,
     ...routerActions
   }
   let composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
@@ -31,4 +33,4 @@ const configureStore = function (initialState) {
   return createStore(rootReducer, initialState, enhancer)
 }
 
-export default { configureStore, history }
+export default {configureStore, history}

@@ -1,6 +1,72 @@
 .home {
   position: relative;
+  background-color: #fff;
+  height: 100vh;
 }
+
 .home-carousel {
   position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  .carousel-inner {
+    mask-image: linear-gradient(356deg, white, transparent);
+  }
+
+  img {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    opacity: .7;
+  }
+}
+
+.home-btn-group {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: {
+    top: 10px;
+    bottom: 10px;
+  }
+}
+
+.home-indicator {
+  display: flex;
+  justify-content: center;
+}
+
+.home-btn-indicator {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 0;
+  background-color: #4ccbda;
+
+  &:first-child {
+    margin-right: 5px;
+  }
+
+  &.active {
+    background-color: #9d30a1;
+  }
+
+  @include hover {
+    background-color: #9d30a1;
+  }
+}
+
+.home-down {
+  display: flex;
+  justify-content: center;
+}
+
+.home-btn-down {
+  font-size: 1.25rem;
+  background-color: transparent;
+  border: 0;
+  color: #4ccbda;
+  margin-top: 5px;
 }
