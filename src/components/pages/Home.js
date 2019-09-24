@@ -1,6 +1,7 @@
 import React, {Component, Fragment, createRef} from 'react'
 import Velocity from 'velocity-animate'
 import Header from 'components/partials/home/Header'
+import Navigation from 'components/partials/home/Navigation'
 import HomePage from 'components/partials/home/HomePage'
 import ProductsPage from 'components/partials/home/ProductsPage'
 import {PAGES} from 'globals.js'
@@ -16,6 +17,7 @@ export default class Home extends Component {
   constructor(props) {
     super(props)
     this.mouseWheel = this.mouseWheel.bind(this)
+    this.gotoIndex = this.gotoIndex.bind(this)
   }
 
   componentDidMount() {
@@ -106,6 +108,7 @@ export default class Home extends Component {
     return (
       <Fragment>
         <Header pages={pages}/>
+        <Navigation pages={pages} gotoidx={this.gotoIndex} />
         <div className='root-content' ref={el => this.elContent = el}>
           <HomePage gotoidx={() => this.gotoIndex(1)} />
           <ProductsPage/>

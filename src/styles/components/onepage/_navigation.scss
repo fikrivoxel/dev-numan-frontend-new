@@ -1,0 +1,81 @@
+.navigation {
+  position: fixed;
+  top: 50%;
+  margin-left: 20px;
+  display: none;
+  z-index: 15;
+  transform: translate(0, -50%);
+  @media (min-width: 1200px) {
+    display: block;
+  }
+}
+
+.navigation-menu {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  li {
+    margin-left: 50px;
+    &:last-child {
+      position: absolute;
+      top: 0;
+      left: -29px;
+      height: 38px;
+      @include transition(transform 0.3s);
+      &:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #9c019d;
+        transform: translate(0, -50%);
+      }
+    }
+    &.active {
+      &:first-child ~ li:last-child {
+        transform: translateY(0);
+      }
+      &:nth-child(2) ~ li:last-child {
+        transform: translateY(100%);
+      }
+      &:nth-child(3) ~ li:last-child {
+        transform: translateY(200%);
+      }
+      &:nth-child(4) ~ li:last-child {
+        transform: translateY(300%);
+      }
+      &:nth-child(5) ~ li:last-child {
+        transform: translateY(400%);
+      }
+    }
+  }
+  &:before {
+    content: '';
+    position: absolute;
+    height: 60%;
+    width: 2px;
+    left: 25px;
+    background-color: #9c019d;
+  }
+}
+
+.navigation-link {
+  font-size: 1.5rem;
+  display: block;
+  background-color: transparent;
+  color: #4ccbda;
+  border: 0;
+  @include transition(color .3s);
+  &.active {
+    color: #9c019d;
+  }
+  @include hover {
+    color: #9c019d;
+  }
+}

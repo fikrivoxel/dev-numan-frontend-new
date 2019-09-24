@@ -52,6 +52,13 @@
   text-align: center;
 }
 
+.header-title-text {
+  > h1 {
+    color: #9d30a1;
+    text-transform: uppercase;
+  }
+}
+
 .header-title-caption {
   font-size: 80%;
 }

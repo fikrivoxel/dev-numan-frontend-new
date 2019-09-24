@@ -50,7 +50,7 @@ export default class Header extends Component {
 
   render() {
     return (
-      <header className='header'>
+      <header className='header' id='header'>
         <nav className='header-nav'>
           <ul className='header-nav-menu'>
             {this.sosmedMap()}

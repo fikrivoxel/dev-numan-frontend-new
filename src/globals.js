@@ -48,5 +48,9 @@ export const PAGES = [
   // }
 ]
 export const DUMMY_COLLECTIONS = [
-  {id: 1, name: '', url: '', thumbnail: ''}
+  {id: 1, name: 'Lunch Set', url: 'lunch-set', thumbnail: '/images/container.png'},
+  {id: 2, name: 'Cook Ware', url: 'cook-ware', thumbnail: '/images/grill.png'},
+  {id: 3, name: 'Home Supplies', url: 'home-supplies', thumbnail: '/images/hand.png'},
+  {id: 4, name: 'Bathroom', url: 'bathroom', thumbnail: '/images/shampoo.png'},
+  {id: 5, name: 'Storage', url: 'storage', thumbnail: '/images/box.png'}
 ]
