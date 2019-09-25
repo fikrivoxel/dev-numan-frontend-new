@@ -51,7 +51,7 @@ class ProductsPage extends Component {
     let container = el.getElementsByClassName('container')[0]
     if (container.offsetTop <= header.offsetHeight + 20) {
       container.style.marginTop = (header.offsetHeight + 20) + 'px'
-      container.style.height = (window.innerHeight - 100) - (header.offsetHeight + 20) + 'px'
+      container.style.height = (window.innerHeight - 20) - (header.offsetHeight + 20) + 'px'
       container.style.overflow = 'auto'
     }
   }
