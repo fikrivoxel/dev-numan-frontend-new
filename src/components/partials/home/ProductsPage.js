@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {compose, bindActionCreators} from 'redux'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
+import {isEqual} from 'lodash'
 import ParalaxWrapper from 'components/partials/ParalaxWrapper'
 import {getFive} from 'store/actions/collections'
 import {DUMMY_COLLECTIONS} from 'globals.js'
@@ -24,18 +25,34 @@ class ProductsPage extends Component {
     let {getFive} = this.props
     try {
       await getFive()
-    } catch (e) {}
+      this.setCollections()
+    } catch (e) {
+    }
     this.fixBoxHeight()
-    this.fixContainer()
+    this.fixHeight()
   }
 
-  fixContainer() {
+  componentDidUpdate(prevProps) {
+    if (!isEqual(prevProps.collections, this.props.collections)) {
+      this.setCollections()
+    }
+  }
+
+  setCollections() {
+    let {collections} = this.props
+    this.setState({
+      collections: collections
+    })
+  }
+
+  fixHeight() {
     let el = document.getElementById('products')
     let header = document.getElementById('header')
     let container = el.getElementsByClassName('container')[0]
-    if (container.offsetTop <= header.offsetHeight) {
-      console.log(header.offsetHeight - container.offsetTop)
-      container.style.marginTop = ((header.offsetHeight - container.offsetTop) + 20) + 'px'
+    if (container.offsetTop <= header.offsetHeight + 20) {
+      container.style.marginTop = (header.offsetHeight + 20) + 'px'
+      container.style.height = (window.innerHeight - 100) - (header.offsetHeight + 20) + 'px'
+      container.style.overflow = 'auto'
     }
   }
 

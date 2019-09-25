@@ -11,19 +11,29 @@ export default class Home extends Component {
     pages: PAGES,
     activeIndex: 0
   }
-
   elContent = createRef()
+  touchStartY = 0
+  touchStartX = 0
+  touchEndY = 0
+  touchEndX = 0
+  lastAnimation = 0
+  scrollings = []
+
 
   constructor(props) {
     super(props)
     this.mouseWheel = this.mouseWheel.bind(this)
     this.gotoIndex = this.gotoIndex.bind(this)
+    this.touchStartHandler = this.touchStartHandler.bind(this)
+    this.touchMoveHandler = this.touchMoveHandler.bind(this)
   }
 
   componentDidMount() {
     this.bodyFix()
     document.addEventListener('mousewheel', this.mouseWheel)
     document.addEventListener('wheel', this.mouseWheel)
+    this.elContent.addEventListener('touchstart', this.touchStartHandler)
+    this.elContent.addEventListener('touchmove', this.touchMoveHandler)
   }
 
   componentDidUpdate(_prevProps, prevState) {
@@ -35,6 +45,8 @@ export default class Home extends Component {
   componentWillUnmount() {
     document.removeEventListener('mousewheel', this.mouseWheel)
     document.removeEventListener('wheel', this.mouseWheel)
+    this.elContent.removeEventListener('touchstart', this.touchStartHandler)
+    this.elContent.removeEventListener('touchmove', this.touchMoveHandler)
   }
 
   bodyFix() {
@@ -94,6 +106,12 @@ export default class Home extends Component {
     })
   }
 
+  isMoving() {
+    let timeNow = new Date().getTime()
+    return timeNow - this.lastAnimation < 600 + 700;
+
+  }
+
   move() {
     let {activeIndex} = this.state
     Velocity(this.elContent, {
@@ -101,6 +119,44 @@ export default class Home extends Component {
     }, {
       duration: 700
     })
+    this.lastAnimation = new Date().getTime()
+  }
+
+  isReallyTouch(e) {
+    return typeof e.pointerType === 'undefined' || e.pointerType !== 'mouse'
+  }
+
+  getEventsPage(e) {
+    let events = []
+    events.y = (typeof e.pageY !== 'undefined' && (e.pageY || e.pageX) ? e.pageY : e.touches[0].pageY)
+    events.x = (typeof e.pageX !== 'undefined' && (e.pageY || e.pageX) ? e.pageX : e.touches[0].pageX)
+    return events
+  }
+
+  touchStartHandler(e) {
+    if (this.isReallyTouch(e)) {
+      let touchEvents = this.getEventsPage(e)
+      this.touchStartY = touchEvents.y
+      this.touchStartX = touchEvents.x
+    }
+  }
+
+  touchMoveHandler(e) {
+    console.log(e.target)
+    if (this.isReallyTouch(e)) {
+      if (!this.isMoving()) {
+        let touchEvents = this.getEventsPage(e)
+        this.touchEndY = touchEvents.y
+        this.touchEndX = touchEvents.x
+        if (Math.abs(this.touchStartY - this.touchEndY) > (this.elContent.offsetHeight / 100 * 5)) {
+          if (this.touchStartY > this.touchEndY) {
+            this.next()
+          } else if (this.touchEndY > this.touchStartY) {
+            this.prev()
+          }
+        }
+      }
+    }
   }
 
   render() {
@@ -108,9 +164,9 @@ export default class Home extends Component {
     return (
       <Fragment>
         <Header pages={pages}/>
-        <Navigation pages={pages} gotoidx={this.gotoIndex} />
+        <Navigation pages={pages} gotoidx={this.gotoIndex}/>
         <div className='root-content' ref={el => this.elContent = el}>
-          <HomePage gotoidx={() => this.gotoIndex(1)} />
+          <HomePage gotoidx={() => this.gotoIndex(1)}/>
           <ProductsPage/>
         </div>
       </Fragment>

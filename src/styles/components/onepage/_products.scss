@@ -21,6 +21,9 @@
       }
     }
   }
+  @include media-breakpoint-down(sm) {
+    align-items: flex-start;
+  }
 }
 
 .products-bg {
@@ -70,6 +73,9 @@
   > img {
     width: 30%;
     margin-bottom: 10px;
+  }
+  > span {
+    text-align: center;
   }
   @include media-breakpoint-down(md) {
     margin-bottom: 0;

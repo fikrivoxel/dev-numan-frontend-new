@@ -1,7 +1,8 @@
 import {SET_COLLECTIONS, REMOVE_COLLECTIONS} from 'store/actions/collections'
 
 const setCollections = function (state, collections) {
-  
+  state = collections
+  return state
 }
 const removeCollections = function (state) {
   state = []

@@ -1,5 +1,5 @@
 export const NODE_ENV = 'development'
-export const BASE_URL = ''
+export const BASE_URL = 'http://api.numan.voxelsoftware.co'
 export const PAGES = [
   {
     id: 'home',
