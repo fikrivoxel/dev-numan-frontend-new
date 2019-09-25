@@ -1,6 +1,7 @@
 #products {
   height: 100vh;
   background-color: #eee;
+  z-index: 2;
 }
 
 .products {
@@ -9,8 +10,11 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
+  z-index: 5;
+  overflow: hidden;
   .container {
-    max-width: 760px;
+    max-width: 720px;
+    z-index: 10;
     @include media-breakpoint-down(sm) {
       max-width: 80%;
     }
@@ -31,23 +35,20 @@
 }
 
 .bg-1 {
-  bottom: 30%;
+  top: -30%;
   right: 0;
   width: 500px;
   @include media-breakpoint-down(sm) {
-    top: 0;
-    bottom: 0;
     width: 50%;
   }
 }
 
 .bg-2 {
-  top: 50%;
+  top: 60%;
   left: 0;
   width: 500px;
+  z-index: 5;
   @include media-breakpoint-down(sm) {
-    top: auto;
-    bottom: 0;
     width: 50%;
   }
 }

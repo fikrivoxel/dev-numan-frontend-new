@@ -4,6 +4,7 @@ import Header from 'components/partials/home/Header'
 import Navigation from 'components/partials/home/Navigation'
 import HomePage from 'components/partials/home/HomePage'
 import ProductsPage from 'components/partials/home/ProductsPage'
+import CatalogsPage from 'components/partials/home/CatalogsPage'
 import {PAGES} from 'globals.js'
 
 export default class Home extends Component {
@@ -18,6 +19,7 @@ export default class Home extends Component {
   touchEndX = 0
   lastAnimation = 0
   scrollings = []
+  isMove = false
 
 
   constructor(props) {
@@ -39,6 +41,7 @@ export default class Home extends Component {
   componentDidUpdate(_prevProps, prevState) {
     if (prevState.activeIndex !== this.state.activeIndex) {
       this.move()
+      this.hamePageParallax()
     }
   }
 
@@ -61,10 +64,32 @@ export default class Home extends Component {
   alloctions(e) {
     let delta = Math.max(-1, Math.min(1,
       (e.wheelDelta || -e.deltaY || -e.detail)))
-    if (delta < 0) {
-      this.next()
-    } else {
-      this.prev()
+
+    let horizontalDetection = typeof e.wheelDeltaX !== 'undefined' || typeof e.deltaX !== 'undefined'
+    let isScrollingVertically = (Math.abs(e.wheelDeltaX) < Math.abs(e.wheelDelta)) || (Math.abs(e.deltaX) < Math.abs(e.deltaY) || !horizontalDetection)
+
+
+    if (this.scrollings.length > 149) {
+      this.scrollings.shift()
+    }
+
+    this.scrollings.push(delta)
+
+    let curTime = new Date().getTime()
+    let prevTime = this.lastAnimation
+    let timeDiff = curTime - prevTime
+    this.lastAnimation = curTime
+
+    if (timeDiff > 200) {
+      this.scrollings = []
+    }
+
+    if (this.scrollings.length === 0 && isScrollingVertically) {
+      if (delta < 0) {
+        this.next()
+      } else {
+        this.prev()
+      }
     }
   }
 
@@ -106,20 +131,28 @@ export default class Home extends Component {
     })
   }
 
-  isMoving() {
-    let timeNow = new Date().getTime()
-    return timeNow - this.lastAnimation < 600 + 700;
-
-  }
-
   move() {
     let {activeIndex} = this.state
+    this.isMove = true
     Velocity(this.elContent, {
       translateY: `${activeIndex * -this.elContent.offsetHeight}px`,
     }, {
-      duration: 700
+      duration: 700,
+      complete: () => {
+        this.isMove = false
+      }
     })
     this.lastAnimation = new Date().getTime()
+  }
+
+  hamePageParallax() {
+    let {activeIndex} = this.state
+    let home = document.getElementById('home').getElementsByClassName('home')[0]
+    if (activeIndex !== 0) {
+      home.style.transform = 'translateY(100px)'
+    } else {
+      home.style.transform = 'translateY(0)'
+    }
   }
 
   isReallyTouch(e) {
@@ -142,9 +175,8 @@ export default class Home extends Component {
   }
 
   touchMoveHandler(e) {
-    console.log(e.target)
     if (this.isReallyTouch(e)) {
-      if (!this.isMoving()) {
+      if (!this.isMove) {
         let touchEvents = this.getEventsPage(e)
         this.touchEndY = touchEvents.y
         this.touchEndX = touchEvents.x
@@ -168,6 +200,7 @@ export default class Home extends Component {
         <div className='root-content' ref={el => this.elContent = el}>
           <HomePage gotoidx={() => this.gotoIndex(1)}/>
           <ProductsPage/>
+          <CatalogsPage/>
         </div>
       </Fragment>
     )

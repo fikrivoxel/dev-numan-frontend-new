@@ -19,15 +19,15 @@ export const PAGES = [
     },
     active: false
   },
-  // {
-  //   id: 'catalog',
-  //   name: 'Catalogs Download',
-  //   title: {
-  //     type: 'text',
-  //     caption: 'Get the product list of NOMAN'
-  //   },
-  //   active: false
-  // },
+  {
+    id: 'catalog',
+    name: 'Catalogs Download',
+    title: {
+      type: 'text',
+      caption: 'Get the product list of NOMAN'
+    },
+    active: false
+  },
   // {
   //   id: 'aboutus',
   //   name: 'About Us',
