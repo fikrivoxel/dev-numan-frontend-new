@@ -2,9 +2,9 @@ import React, {Component} from 'react'
 import {compose, bindActionCreators} from 'redux'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {isEqual} from 'lodash'
+import {isEqual, cloneDeep} from 'lodash'
 import ParalaxWrapper from 'components/partials/ParalaxWrapper'
-import {getFive} from 'store/actions/collections'
+import {getAll} from 'store/actions/collections'
 import {DUMMY_COLLECTIONS} from 'globals.js'
 
 const stateToProps = function (state) {
@@ -13,18 +13,18 @@ const stateToProps = function (state) {
   }
 }
 const dispatchToProps = function (dispatch) {
-  return bindActionCreators({getFive}, dispatch)
+  return bindActionCreators({getAll}, dispatch)
 }
 
 class ProductsPage extends Component {
   state = {
-    collections: DUMMY_COLLECTIONS
+    collections: cloneDeep(DUMMY_COLLECTIONS)
   }
 
   async componentDidMount() {
-    let {getFive} = this.props
+    let {getAll} = this.props
     try {
-      await getFive()
+      await getAll()
       this.setCollections()
     } catch (e) {
     }
@@ -70,7 +70,7 @@ class ProductsPage extends Component {
     let {collections} = this.state
     let cols = collections.map((c, i) => {
       return (
-        <div className='col-6 col-md-4' key={i}>
+        <div className='col-6 col-md-4 bounce' key={i}>
           <Link to={`/products/${c.url}`} className='products-link'>
             <ParalaxWrapper parallaxScale={.2}>
               <div className='products-list'>
@@ -83,10 +83,10 @@ class ProductsPage extends Component {
       )
     })
     return (
-      <div className='container'>
+      <div className='container' id='products-container'>
         <div className='row' id='products-row'>
           {cols}
-          <div className='col-6 col-md-4'>
+          <div className='col-6 col-md-4 bounce'>
             <Link to={`/products`} className='products-link'>
               <ParalaxWrapper parallaxScale={.2}>
                 <div className='products-list'>

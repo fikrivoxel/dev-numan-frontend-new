@@ -15,7 +15,7 @@ export const removeCollections = function () {
   }
 }
 
-export const getFive = function () {
+export const getAll = function () {
   return async function (dispatch) {
     try {
       let collections = await Collections.getFive()

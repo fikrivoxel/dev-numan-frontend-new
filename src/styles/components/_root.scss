@@ -3,6 +3,10 @@
   overflow: hidden;
 }
 
+.body-bgc {
+  background-color: #eee;
+}
+
 .root,
 .root-container {
   position: relative;
@@ -10,4 +14,10 @@
 
 .root-content {
   height: 100vh;
+}
+
+.container {
+  &.make-col {
+    margin-top: 20px;
+  }
 }

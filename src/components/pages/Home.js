@@ -42,6 +42,7 @@ export default class Home extends Component {
     if (prevState.activeIndex !== this.state.activeIndex) {
       this.move()
       this.hamePageParallax()
+      this.animation()
     }
   }
 
@@ -121,6 +122,10 @@ export default class Home extends Component {
         }
       }
     }
+  }
+
+  isOverflown({clientWidth, clientHeight, scrollWidth, scrollHeight}) {
+    return scrollHeight > clientHeight || scrollWidth > clientWidth;
   }
 
   next() {
@@ -208,8 +213,9 @@ export default class Home extends Component {
 
   touchMoveHandler(e) {
     let target = e.target
-    console.log('touch')
-    if (target.closest('#products-row')) return
+    if (target.closest('#products-row')) {
+      if (this.isOverflown(target.closest('#products-container'))) return
+    }
     if (target.closest('#contactus-row')) return
     if (this.isReallyTouch(e)) {
       if (!this.isMove) {
@@ -227,6 +233,22 @@ export default class Home extends Component {
     }
   }
 
+  animation() {
+    let {activeIndex} = this.state
+    let products = document.getElementById('products')
+    let bounces = products.getElementsByClassName('bounce')
+    if (activeIndex >= 1) {
+      for (let i = 0; i < bounces.length; i++) {
+        Velocity(bounces[i], {
+          opacity: 1,
+          translateY: 0
+        }, {
+          delay: 500
+        })
+      }
+    }
+  }
+
   render() {
     let {pages} = this.state
     return (
@@ -237,8 +259,8 @@ export default class Home extends Component {
           <HomePage gotoidx={() => this.gotoIndex(1)}/>
           <ProductsPage/>
           <CatalogsPage/>
-          <AboutUsPage />
-          <ContactUsPage />
+          <AboutUsPage/>
+          <ContactUsPage/>
         </div>
       </Fragment>
     )
