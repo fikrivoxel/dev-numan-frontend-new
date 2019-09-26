@@ -1,5 +1,6 @@
 import React, {Component, Fragment, createRef} from 'react'
 import Velocity from 'velocity-animate'
+import {cloneDeep} from 'lodash'
 import Header from 'components/partials/home/Header'
 import Navigation from 'components/partials/home/Navigation'
 import HomePage from 'components/partials/home/HomePage'
@@ -11,7 +12,7 @@ import {PAGES} from 'globals.js'
 
 export default class Home extends Component {
   state = {
-    pages: PAGES,
+    pages: cloneDeep(PAGES),
     activeIndex: 0
   }
   elContent = createRef()
@@ -34,10 +35,7 @@ export default class Home extends Component {
 
   componentDidMount() {
     this.bodyFix()
-    document.addEventListener('mousewheel', this.mouseWheel)
-    document.addEventListener('wheel', this.mouseWheel)
-    this.elContent.addEventListener('touchstart', this.touchStartHandler)
-    this.elContent.addEventListener('touchmove', this.touchMoveHandler)
+    this.addListener()
   }
 
   componentDidUpdate(_prevProps, prevState) {
@@ -48,20 +46,48 @@ export default class Home extends Component {
   }
 
   componentWillUnmount() {
+    this.removeBodyFix()
+    this.removeListener()
+    this.stateReset()
+  }
+
+  removeListener() {
+    let root = document.getElementById('root')
     document.removeEventListener('mousewheel', this.mouseWheel)
     document.removeEventListener('wheel', this.mouseWheel)
-    this.elContent.removeEventListener('touchstart', this.touchStartHandler)
-    this.elContent.removeEventListener('touchmove', this.touchMoveHandler)
+    root.removeEventListener('touchstart', this.touchStartHandler)
+    root.removeEventListener('touchmove', this.touchMoveHandler)
+  }
+
+  addListener() {
+    let root = document.getElementById('root')
+    document.addEventListener('mousewheel', this.mouseWheel)
+    document.addEventListener('wheel', this.mouseWheel)
+    root.addEventListener('touchstart', this.touchStartHandler)
+    root.addEventListener('touchmove', this.touchMoveHandler)
+  }
+
+  stateReset() {
+    this.setState({
+      pages: cloneDeep(PAGES),
+      activeIndex: 0
+    })
   }
 
   bodyFix() {
-    let body = document.getElementsByTagName('body')[0]
+    let body = document.body
     body.classList.add('body-fix')
+  }
+
+  removeBodyFix() {
+    let body = document.body
+    body.classList.remove('body-fix')
   }
 
   mouseWheel(e) {
     this.alloctions(e)
   }
+
 
   alloctions(e) {
     let delta = Math.max(-1, Math.min(1,
@@ -182,6 +208,7 @@ export default class Home extends Component {
 
   touchMoveHandler(e) {
     let target = e.target
+    console.log('touch')
     if (target.closest('#products-row')) return
     if (target.closest('#contactus-row')) return
     if (this.isReallyTouch(e)) {

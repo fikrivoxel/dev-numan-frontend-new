@@ -16,10 +16,11 @@ export default class Navigation extends Component {
     return (
       <ul className='navigation-menu'>
         {menu}
-        <li className='dumb' />
+        <li className='dumb'/>
       </ul>
     )
   }
+
   render() {
     return (
       <div className='navigation'>
