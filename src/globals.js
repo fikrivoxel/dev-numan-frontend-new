@@ -37,15 +37,15 @@ export const PAGES = [
     },
     active: false
   },
-  // {
-  //   id: 'contactus',
-  //   name: 'Contact Us',
-  //   title: {
-  //     type: 'text',
-  //     caption: 'Stay in touch with us!'
-  //   },
-  //   active: false
-  // }
+  {
+    id: 'contactus',
+    name: 'Contact Us',
+    title: {
+      type: 'text',
+      caption: 'Stay in touch with us!'
+    },
+    active: false
+  }
 ]
 export const DUMMY_COLLECTIONS = [
   {id: 1, name: 'Lunch Set', url: 'lunch-set', thumbnail: '/images/container.png'},

@@ -6,6 +6,7 @@ import HomePage from 'components/partials/home/HomePage'
 import ProductsPage from 'components/partials/home/ProductsPage'
 import CatalogsPage from 'components/partials/home/CatalogsPage'
 import AboutUsPage from 'components/partials/home/AboutUsPage'
+import ContactUsPage from 'components/partials/home/ContactUsPage'
 import {PAGES} from 'globals.js'
 
 export default class Home extends Component {
@@ -180,6 +181,7 @@ export default class Home extends Component {
   touchMoveHandler(e) {
     let target = e.target
     if (target.closest('#products-row')) return
+    if (target.closest('#contactus-row')) return
     if (this.isReallyTouch(e)) {
       if (!this.isMove) {
         let touchEvents = this.getEventsPage(e)
@@ -207,6 +209,7 @@ export default class Home extends Component {
           <ProductsPage/>
           <CatalogsPage/>
           <AboutUsPage />
+          <ContactUsPage />
         </div>
       </Fragment>
     )

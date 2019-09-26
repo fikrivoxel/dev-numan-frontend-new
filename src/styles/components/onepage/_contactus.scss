@@ -1,0 +1,42 @@
+#contactus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: url('/images/contactus-bg.png') no-repeat center center white;
+  background-size: cover;
+  @include media-breakpoint-down(sm) {
+    align-items: flex-start;
+  }
+}
+.contactus-row {
+  background-color: #fff;
+  @include media-breakpoint-down(md) {
+    padding: 15px;
+    margin: {
+      left: 0;
+      right: 0;
+    }
+    height: calc(100vh - 220px);
+    overflow: auto;
+  }
+  @include media-breakpoint-down(sm) {
+    height: calc(100vh - 180px);
+  }
+}
+.contactus-form,
+.contactus-about {
+  padding: {
+    top: 20px;
+    bottom: 20px;
+  }
+}
+
+.contactus-about-title {
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.contactus-about-desc-item {
+  margin-bottom: 15px;
+}
