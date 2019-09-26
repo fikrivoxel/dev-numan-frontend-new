@@ -1,0 +1,145 @@
+.box-grid {
+  display: flex;
+  margin-bottom: 30px;
+  background-color: #fff;
+  color: inherit;
+  @include hover {
+    text-decoration: none;
+    .box-grid-img {
+      transform: scale(1.1);
+    }
+    .box-grid-desc-name {
+      color: #9c019d;
+    }
+    .box-grid-price {
+      color: #212529;
+    }
+  }
+}
+
+.box-mini {
+  flex-direction: column;
+
+  .box-grid-img {
+    width: 100%;
+  }
+
+  .box-grid-desc-tag {
+    display: none;
+  }
+
+  .box-grid-img-overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: perspective(1px);
+    width: 100%;
+
+    &:before {
+      position: absolute;
+      content: '';
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(#9c019d, .5);
+      transform: scale(0);
+      z-index: 1;
+      @include transition(transform .3s);
+    }
+
+    &:after {
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-font-smoothing: antialiased;
+      display: inline-block;
+      font-family: 'Numan';
+      font-weight: normal;
+      font-style: normal;
+      font-variant: normal;
+      text-rendering: auto;
+      line-height: 1;
+      position: absolute;
+      color: white;
+      z-index: 2;
+    }
+  }
+
+  .box-grid-desc {
+    border-top: 3px solid #9c019d;
+  }
+
+  .box-grid-desc-name {
+    text-align: center;
+    padding: {
+      top: 10px;
+      bottom: 10px;
+    }
+  }
+
+  @include hover {
+    .box-grid-img-overlay {
+      &:before {
+        transform: scale(1);
+      }
+
+      &:after {
+        content: '\e801';
+      }
+    }
+  }
+}
+
+.box-full {
+  @include media-breakpoint-down(sm) {
+    flex-direction: column;
+  }
+  .box-grid-img-overlay {
+    width: 200px;
+    @include media-breakpoint-down(sm) {
+      width: 100%;
+    }
+  }
+  .box-grid-img {
+    width: 100%;
+  }
+  .box-grid-desc {
+    width: calc(100% - 200px);
+    @include media-breakpoint-down(sm) {
+      width: 100%;
+    }
+  }
+  .box-grid-desc-name {
+    font-size: 20px;
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+  }
+  .box-grid-desc-desk {
+    height: 50px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  .box-name-price {
+    display: none;
+  }
+}
+
+.box-grid-img-overlay {
+  position: relative;
+  overflow: hidden;
+  width: 250px;
+}
+
+.box-grid-price {
+  padding: {
+    left: 15px;
+    right: 15px;
+  }
+}
+
+.box-grid-img {
+  @include transition(width .3s, transform .3s);
+}
+
+.box-name-price {
+  color: #9c019d;
+}

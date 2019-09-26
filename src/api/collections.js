@@ -2,7 +2,7 @@ import {get} from 'axios'
 import {BASE_URL} from 'globals.js'
 
 export default {
-  async getAll() {
+  async getAll(abortController) {
     try {
       let {data} = await get(`${BASE_URL}/collections?page=1&perpage=50`)
       return data.collections

@@ -7,3 +7,6 @@
     transform: translateY(0);
   }
 }
+.animate-width {
+  @include transition(max-width .3s, flex .3s);
+}

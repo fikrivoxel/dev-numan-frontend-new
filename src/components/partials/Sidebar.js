@@ -1,19 +1,14 @@
 import React, {Component} from 'react'
-import {compose, bindActionCreators} from 'redux'
+import {compose} from 'redux'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {withRouter} from 'react-router-dom'
 import {isEqual} from 'lodash'
-import {getAll} from 'store/actions/collections'
 
 const mapStateToProps = function (state) {
   return {
     collections: state.collections
   }
-}
-
-const mapDispatchToProps = function (dispatch) {
-  return bindActionCreators({getAll}, dispatch)
 }
 
 class Sidebar extends Component {
@@ -22,10 +17,6 @@ class Sidebar extends Component {
   }
 
   async componentDidMount() {
-    let {getAll} = this.props
-    try {
-      await getAll()
-    } catch (e) {}
     this.getUrl()
   }
 
@@ -82,5 +73,5 @@ class Sidebar extends Component {
 
 export default compose(
   withRouter,
-  connect(mapStateToProps, mapDispatchToProps)
+  connect(mapStateToProps)
 )(Sidebar)

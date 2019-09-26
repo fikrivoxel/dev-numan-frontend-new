@@ -1,8 +1,15 @@
 import React, {Component, Fragment} from 'react'
+import {compose, bindActionCreators} from 'redux'
+import {connect} from 'react-redux'
 import Header from 'components/partials/Header'
 import Sidebar from 'components/partials/Sidebar'
+import {getAll, removeCollections} from 'store/actions/collections'
 
-export default class NormalPage extends Component {
+const mapDispatchToProps = function (dispatch) {
+  return bindActionCreators({getAll, removeCollections}, dispatch)
+}
+
+class NormalPage extends Component {
   state = {
     isOpen: false
   }
@@ -12,12 +19,18 @@ export default class NormalPage extends Component {
     this.toggleOpen = this.toggleOpen.bind(this)
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    let {getAll} = this.props
+    try {
+      await getAll()
+    } catch (e) {
+    }
     this.addBackground()
   }
 
   componentWillUnmount() {
     this.removeBackground()
+    this.props.removeCollections()
   }
 
   addBackground() {
@@ -37,12 +50,12 @@ export default class NormalPage extends Component {
 
   render() {
     let {children} = this.props
-    let {isOpen}  = this.state
+    let {isOpen} = this.state
     return (
       <Fragment>
-        <Header isopen={isOpen} toggleopen={this.toggleOpen} />
+        <Header isopen={isOpen} toggleopen={this.toggleOpen}/>
         <div className='container make-col'>
-          <Sidebar isopen={isOpen} />
+          <Sidebar isopen={isOpen}/>
           <div className='normal-content'>
             {children}
           </div>
@@ -51,3 +64,7 @@ export default class NormalPage extends Component {
     )
   }
 }
+
+export default compose(
+  connect(null, mapDispatchToProps)
+)(NormalPage)

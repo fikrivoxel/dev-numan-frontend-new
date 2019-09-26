@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {isEqual, cloneDeep} from 'lodash'
 import ParalaxWrapper from 'components/partials/ParalaxWrapper'
-import {getAll} from 'store/actions/collections'
+import {getFive, removeCollections} from 'store/actions/collections'
 import {DUMMY_COLLECTIONS} from 'globals.js'
 
 const stateToProps = function (state) {
@@ -13,7 +13,7 @@ const stateToProps = function (state) {
   }
 }
 const dispatchToProps = function (dispatch) {
-  return bindActionCreators({getAll}, dispatch)
+  return bindActionCreators({getFive, removeCollections}, dispatch)
 }
 
 class ProductsPage extends Component {
@@ -22,12 +22,10 @@ class ProductsPage extends Component {
   }
 
   async componentDidMount() {
-    let {getAll} = this.props
+    let {getFive} = this.props
     try {
-      await getAll()
-      this.setCollections()
-    } catch (e) {
-    }
+      await getFive()
+    } catch (e) {}
     this.fixHeight()
     this.fixBoxHeight()
   }
@@ -36,6 +34,10 @@ class ProductsPage extends Component {
     if (!isEqual(prevProps.collections, this.props.collections)) {
       this.setCollections()
     }
+  }
+
+  componentWillUnmount() {
+    this.props.removeCollections()
   }
 
   setCollections() {

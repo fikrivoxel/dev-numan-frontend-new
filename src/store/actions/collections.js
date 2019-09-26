@@ -18,6 +18,20 @@ export const removeCollections = function () {
 export const getAll = function () {
   return async function (dispatch) {
     try {
+      let collections = await Collections.getAll()
+      dispatch(setCollections(collections))
+      return Promise.resolve()
+    } catch (err) {
+      dispatch(removeCollections())
+      return Promise.reject(err)
+    }
+  }
+}
+
+
+export const getFive = function () {
+  return async function (dispatch) {
+    try {
       let collections = await Collections.getFive()
       dispatch(setCollections(collections))
       return Promise.resolve()
