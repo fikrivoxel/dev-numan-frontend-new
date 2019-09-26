@@ -125,14 +125,16 @@ export default class Home extends Component {
 
   gotoIndex(idx) {
     let {pages} = this.state
-    this.setState({
-      activeIndex: idx,
-      pages: pages.map((p, i) => {
-        if (i === idx) p.active = true
-        else p.active = false
-        return p
+    if (!this.isMove) {
+      this.setState({
+        activeIndex: idx,
+        pages: pages.map((p, i) => {
+          if (i === idx) p.active = true
+          else p.active = false
+          return p
+        })
       })
-    })
+    }
   }
 
   move() {

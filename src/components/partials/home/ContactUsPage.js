@@ -7,12 +7,10 @@ export default class ContactUsPage extends Component {
   fixHeight() {
     let el = document.getElementById('contactus')
     let container = el.getElementsByClassName('container')[0]
-    if (window.innerWidth <= 768) {
-      if (container.offsetTop <= 150) {
-        container.style.marginTop = '150px'
-        container.style.height = (window.innerHeight - 20) - 150 + 'px'
-        container.style.overflow = 'auto'
-      }
+    if (container.offsetTop <= 150) {
+      container.style.marginTop = '150px'
+      container.style.height = (window.innerHeight - 20) - 150 + 'px'
+      container.style.overflow = 'auto'
     }
   }
   render() {
