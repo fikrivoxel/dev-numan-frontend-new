@@ -28,15 +28,15 @@ export const PAGES = [
     },
     active: false
   },
-  // {
-  //   id: 'aboutus',
-  //   name: 'About Us',
-  //   title: {
-  //     type: 'text',
-  //     caption: 'Amazing stories of our product'
-  //   },
-  //   active: false
-  // },
+  {
+    id: 'aboutus',
+    name: 'About Us',
+    title: {
+      type: 'text',
+      caption: 'Amazing stories of our product'
+    },
+    active: false
+  },
   // {
   //   id: 'contactus',
   //   name: 'Contact Us',

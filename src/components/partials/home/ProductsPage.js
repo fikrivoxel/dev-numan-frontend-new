@@ -84,7 +84,7 @@ class ProductsPage extends Component {
     })
     return (
       <div className='container'>
-        <div className='row'>
+        <div className='row' id='products-row'>
           {cols}
           <div className='col-6 col-md-4'>
             <Link to={`/products`} className='products-link'>

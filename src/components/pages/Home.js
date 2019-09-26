@@ -5,6 +5,7 @@ import Navigation from 'components/partials/home/Navigation'
 import HomePage from 'components/partials/home/HomePage'
 import ProductsPage from 'components/partials/home/ProductsPage'
 import CatalogsPage from 'components/partials/home/CatalogsPage'
+import AboutUsPage from 'components/partials/home/AboutUsPage'
 import {PAGES} from 'globals.js'
 
 export default class Home extends Component {
@@ -84,11 +85,13 @@ export default class Home extends Component {
       this.scrollings = []
     }
 
-    if (this.scrollings.length === 0 && isScrollingVertically) {
-      if (delta < 0) {
-        this.next()
-      } else {
-        this.prev()
+    if (!this.isMove) {
+      if (this.scrollings.length === 0 && isScrollingVertically) {
+        if (delta < 0) {
+          this.next()
+        } else {
+          this.prev()
+        }
       }
     }
   }
@@ -175,6 +178,8 @@ export default class Home extends Component {
   }
 
   touchMoveHandler(e) {
+    let target = e.target
+    if (target.closest('#products-row')) return
     if (this.isReallyTouch(e)) {
       if (!this.isMove) {
         let touchEvents = this.getEventsPage(e)
@@ -201,6 +206,7 @@ export default class Home extends Component {
           <HomePage gotoidx={() => this.gotoIndex(1)}/>
           <ProductsPage/>
           <CatalogsPage/>
+          <AboutUsPage />
         </div>
       </Fragment>
     )

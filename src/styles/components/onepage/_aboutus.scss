@@ -1,0 +1,13 @@
+#aboutus {
+  height: 100vh;
+  background: url('/images/aboutus-bg.png') no-repeat center center white;
+  background-size: cover;
+}
+
+.aboutus-description {
+  margin-top: 200px;
+  text-align: center;
+  @include media-breakpoint-down(sm) {
+    margin-top: 180px;
+  }
+}

@@ -35,21 +35,22 @@
 }
 
 .bg-1 {
-  top: -30%;
   right: 0;
-  width: 500px;
+  top: -20%;
+  width: 30%;
   @include media-breakpoint-down(sm) {
     width: 50%;
+    top: -10%;
   }
 }
 
 .bg-2 {
-  top: 60%;
-  left: 0;
-  width: 500px;
-  z-index: 5;
+  width: 30%;
+  bottom: -30%;
   @include media-breakpoint-down(sm) {
     width: 50%;
+    top: auto;
+    bottom: -20%;
   }
 }
 
